@@ -1,0 +1,23 @@
+{
+  "name": "vexty-flake-suite",
+  "version": "1.0.0",
+  "description": "vEXTY + FLAKE — Typographic & Geometric Vector Animation Suite (Electron)",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "make": "electron-forge make",
+    "package": "electron-forge package"
+  },
+  "config": {
+    "forge": "./forge.config.js"
+  },
+  "dependencies": {
+    "@ffmpeg/ffmpeg": "^0.12.10"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.1.1",
+    "@electron-forge/maker-squirrel": "^6.1.1",
+    "@electron-forge/maker-zip": "^6.1.1",
+    "electron": "^30.0.0"
+  }
+}

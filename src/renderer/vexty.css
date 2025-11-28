@@ -1,0 +1,142 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #111522, #05060a);
+  color: #e7faff;
+  overflow: hidden;
+}
+.app {
+  display: grid;
+  grid-template-columns: 360px minmax(0,1fr);
+  gap: 12px;
+  padding: 10px;
+  height: 100vh;
+}
+.panel {
+  background: #181c26;
+  border-radius: 14px;
+  border: 1px solid rgba(39,230,255,0.16);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.panel-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:14px;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+}
+.section-label {
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  color:#27e6ff;
+}
+.field-group {
+  background:#10131c;
+  border-radius:10px;
+  border:1px solid rgba(39,230,255,0.12);
+  padding:8px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.field-row { display:flex; gap:8px; }
+.field-row>* { flex:1; }
+label {
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+  color:#7c8a9f;
+}
+input, select, textarea {
+  width:100%;
+  padding:6px 8px;
+  border-radius:8px;
+  border:1px solid rgba(39,230,255,0.1);
+  background:#05070d;
+  color:#e7faff;
+  font-size:13px;
+}
+input[type=range] {
+  appearance:none;
+  height:6px;
+  background:#05070d;
+  border-radius:999px;
+}
+input[type=range]::-webkit-slider-thumb {
+  appearance:none;
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:#27e6ff;
+}
+button {
+  border-radius:8px;
+  border:1px solid rgba(39,230,255,0.2);
+  background:#10131c;
+  color:#e7faff;
+  font-size:12px;
+  padding:6px 8px;
+  cursor:pointer;
+}
+button.primary {
+  background:#27e6ff;
+  color:#000;
+}
+.btn-row { display:flex; flex-wrap:wrap; gap:6px; }
+.canvas-wrapper { flex:1; display:flex; flex-direction:column; gap:8px; }
+.canvas-shell {
+  flex:1;
+  border-radius:14px;
+  background:radial-gradient(circle at top,#101428,#05060a);
+  border:1px solid rgba(39,230,255,0.16);
+  position:relative;
+}
+.canvas-inner {
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px;
+}
+#vexty-canvas {
+  width:100%;
+  height:100%;
+  background:#000;
+  border-radius:10px;
+}
+.status {
+  font-size:11px;
+  color:#7c8a9f;
+  display:flex;
+  justify-content:space-between;
+}
+.pill-toggle {
+  display:inline-flex;
+  border-radius:999px;
+  border:1px solid rgba(39,230,255,0.16);
+  padding:3px;
+  gap:3px;
+}
+.pill-toggle button {
+  border:none;
+  background:transparent;
+  font-size:11px;
+  padding:3px 8px;
+}
+.pill-toggle button.active {
+  background:rgba(39,230,255,0.18);
+}
+.selected-indicator {
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#27e6ff;
+}
+.hint { font-size:11px; color:#7c8a9f; }

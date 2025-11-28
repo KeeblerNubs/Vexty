@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FLAKE — Geometric Pattern Engine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="flake.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="panel">
+      <div class="panel-header">
+        <div>FLAKE ✶</div>
+        <div style="font-size:11px;color:#9a90c8;text-transform:uppercase;letter-spacing:0.12em;">pattern engine</div>
+      </div>
+
+      <div>
+        <div class="section-label">Grid & Shapes</div>
+        <div class="field-group">
+          <div class="field-row">
+            <div>
+              <label for="grid-cols">Columns</label>
+              <input id="grid-cols" type="number" min="4" max="80" value="24" />
+            </div>
+            <div>
+              <label for="grid-rows">Rows</label>
+              <input id="grid-rows" type="number" min="4" max="80" value="14" />
+            </div>
+          </div>
+          <div>
+            <label for="shape-type">Shape</label>
+            <select id="shape-type">
+              <option value="circle">Circle</option>
+              <option value="square">Square</option>
+              <option value="triangle">Triangle</option>
+              <option value="hex">Hex</option>
+              <option value="mix">Mix</option>
+            </select>
+          </div>
+          <div>
+            <label for="density">Density</label>
+            <input id="density" type="range" min="0" max="1" step="0.01" value="0.85" />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label">Noise & Motion</div>
+        <div class="field-group">
+          <div>
+            <label for="noise-amp">Noise Amount</label>
+            <input id="noise-amp" type="range" min="0" max="80" step="1" value="24" />
+          </div>
+          <div>
+            <label for="noise-speed">Noise Speed</label>
+            <input id="noise-speed" type="range" min="0" max="4" step="0.05" value="1.2" />
+          </div>
+          <div>
+            <label for="animate">Animation</label>
+            <select id="animate">
+              <option value="off">Still</option>
+              <option value="on" selected>Looped</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label">Export</div>
+        <div class="field-group">
+          <div class="btn-row">
+            <button id="btn-flake-reroll">Reroll Seed</button>
+            <button id="btn-export-png" class="primary">Export PNG</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="panel">
+      <div class="canvas-wrapper">
+        <div class="canvas-shell">
+          <canvas id="flake-canvas"></canvas>
+        </div>
+      </div>
+      <div class="status">
+        <span id="flake-status">Ready.</span>
+        <span id="flake-meta"></span>
+      </div>
+    </main>
+  </div>
+
+  <script src="flake.js"></script>
+</body>
+</html>

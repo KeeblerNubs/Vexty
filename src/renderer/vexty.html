@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>vEXTY — Typographic Vector Animation Engine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="vexty.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="panel">
+      <div class="panel-header">
+        <div>vEXTY ✶</div>
+        <div style="font-size:11px;color:#7c8a9f;text-transform:uppercase;letter-spacing:0.12em;">typographic engine</div>
+      </div>
+
+      <div>
+        <div class="section-label">Text & Font</div>
+        <div class="field-group">
+          <div>
+            <label for="text-input">Text</label>
+            <input id="text-input" type="text" value="vEXTY" />
+          </div>
+          <div class="field-row">
+            <div>
+              <label for="font-select">Font</label>
+              <select id="font-select">
+                <option value="Inter">Inter</option>
+                <option value="Poppins">Poppins</option>
+                <option value="Roboto">Roboto</option>
+                <option value="Space Grotesk">Space Grotesk</option>
+              </select>
+            </div>
+            <div>
+              <label for="font-size-input">Base Size</label>
+              <input id="font-size-input" type="number" value="96" min="8" max="400" />
+            </div>
+          </div>
+          <div>
+            <label>Layout Mode</label>
+            <div class="pill-toggle">
+              <button id="mode-word" class="active">Word</button>
+              <button id="mode-letters">Letters</button>
+            </div>
+          </div>
+          <div class="btn-row">
+            <button id="btn-generate" class="primary">Regenerate</button>
+            <button id="btn-duplicate">Duplicate</button>
+            <button id="btn-clear">Clear</button>
+          </div>
+          <div class="hint">Click an instance in the canvas to select it.</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label">Transform</div>
+        <div class="field-group">
+          <div class="field-row">
+            <div>
+              <label for="pos-x-range">Translate X</label>
+              <input id="pos-x-range" type="range" min="-400" max="400" value="0" />
+            </div>
+            <div>
+              <label for="pos-y-range">Translate Y</label>
+              <input id="pos-y-range" type="range" min="-300" max="300" value="0" />
+            </div>
+          </div>
+          <div class="field-row">
+            <div>
+              <label for="scale-range">Scale</label>
+              <input id="scale-range" type="range" min="0.2" max="3" step="0.01" value="1" />
+            </div>
+            <div>
+              <label for="rotate-range">Rotate</label>
+              <input id="rotate-range" type="range" min="-180" max="180" value="0" />
+            </div>
+          </div>
+          <div>
+            <label for="letter-spacing-range">Letter Spacing</label>
+            <input id="letter-spacing-range" type="range" min="-40" max="80" value="0" />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label">Animation</div>
+        <div class="field-group">
+          <div class="field-row">
+            <div>
+              <label for="anim-duration">Duration (s)</label>
+              <input id="anim-duration" type="number" value="4" min="0.5" max="30" step="0.5" />
+            </div>
+            <div>
+              <label for="anim-fps">FPS</label>
+              <input id="anim-fps" type="number" value="30" min="1" max="60" />
+            </div>
+          </div>
+          <div class="field-row">
+            <div>
+              <label for="anim-speed">Speed</label>
+              <input id="anim-speed" type="range" min="0.1" max="4" step="0.1" value="1" />
+            </div>
+            <div>
+              <label for="anim-amp">Amplitude</label>
+              <input id="anim-amp" type="range" min="0" max="100" step="1" value="30" />
+            </div>
+          </div>
+          <div>
+            <label for="anim-mode">Animation Style</label>
+            <select id="anim-mode">
+              <option value="wave">Wave</option>
+              <option value="pulse">Pulse</option>
+              <option value="scatter">Scatter</option>
+              <option value="ripple">Ripple</option>
+              <option value="spin">Spin</option>
+              <option value="float">Float</option>
+              <option value="noise">Noise field</option>
+              <option value="sweep">Sweep</option>
+              <option value="glitch">Glitch</option>
+              <option value="vhs">VHS</option>
+              <option value="chromatic">Chromatic</option>
+              <option value="distort">Distort</option>
+            </select>
+          </div>
+          <div class="btn-row">
+            <button id="btn-anim-toggle">Play animation</button>
+            <button id="btn-export-gif" class="primary">Export GIF</button>
+            <button id="btn-export-mp4" class="primary">Export MP4</button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label">Presets</div>
+        <div class="field-group">
+          <div class="btn-row">
+            <button id="btn-preset-save">Save preset</button>
+            <button id="btn-preset-load">Load preset</button>
+          </div>
+          <textarea id="preset-json" rows="4" placeholder="Preset JSON appears here when saved. Paste to load."></textarea>
+        </div>
+      </div>
+    </aside>
+
+    <main class="panel">
+      <div class="canvas-wrapper">
+        <div class="canvas-shell">
+          <div class="canvas-inner">
+            <svg id="vexty-canvas" viewBox="0 0 1920 1080">
+              <defs>
+                <filter id="softGlow">
+                  <feGaussianBlur stdDeviation="10" result="blur" />
+                  <feColorMatrix type="matrix"
+                    values="0 0 0 0 0.39
+                            0 0 0 0 0.57
+                            0 0 0 0 1
+                            0 0 0 0.8 0" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+              <rect x="0" y="0" width="1920" height="1080" fill="#05060a" />
+              <g id="instances-root"></g>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="status">
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span class="selected-indicator" id="selected-indicator" style="opacity:0.25;"></span>
+          <span>Selected: <strong id="selected-label">none</strong></span>
+        </div>
+        <div>
+          Instances: <strong id="instance-count">0</strong> ·
+          <span id="status-label">Ready</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="vexty.js"></script>
+</body>
+</html>
