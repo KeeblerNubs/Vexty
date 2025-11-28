@@ -1,4 +1,4 @@
-# vEXTY + FLAKE Suite
+# Vexty The Vector Maker
 
 Electron-based creative suite containing:
 
