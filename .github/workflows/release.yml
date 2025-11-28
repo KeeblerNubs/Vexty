@@ -1,0 +1,43 @@
+name: Build and Release Windows Executable
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Windows executable
+        run: npm run make -- --platform=win32 --arch=x64
+
+      - name: Locate installer asset
+        id: find_installer
+        shell: bash
+        run: |
+          OUTPUT_DIR="out/make/squirrel.windows/x64"
+          SETUP=$(find "$OUTPUT_DIR" -name "*Setup.exe" | head -n 1)
+          if [ -z "$SETUP" ]; then
+            echo "No setup executable found in $OUTPUT_DIR" >&2
+            exit 1
+          fi
+          echo "setup=$SETUP" >> "$GITHUB_OUTPUT"
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{ steps.find_installer.outputs.setup }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
